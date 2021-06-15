@@ -1,106 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>My Details</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Mission Work Activity Log</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
   </head>
-  <body>
 
+  <body>
     <!--Hero header-->
     <section class="hero is-dark">
       <div class="hero-body">
         <p class="title title-p">
-          Justin Owens - CSIS 408-B01
+          Mission Work Activity Log
         </p>
-      </div>
-    </section><br/>
-
-    <!--Tab navigation bar-->
-    <div class="tabs is-boxed is-toggle is-fullwidth">
-      <ul>
-        <li><a href="trip.html" rel="external">Trip Projection</a></li>
-        <li class="is-active"><a href="index.html" rel="external">My Details</a></li>
-        <li><a href="missionary.html" rel="external">Missionary</a></li>
-      </ul>
-    </div>
-
-    <!--Picture with caption-->
-    <figure>
-      <img src="mypic.png" alt="Justin Owens">
-      <figcaption>Justin Owens</figcaption>
-    </figure>
-
-    <!--Title-->
-    <section class="section">
-      <!--Intro paragraph-->
-      <p>
-        Hello! My name is Justin Owens and I live in Texas. My wife and I have been married for 20 years with four kids. We served overseas in Ukraine and Estonia for collectively six years as missionaries with the BMA of America. I previously earned two Masters degrees in religion and divinity from Liberty while overseas that I used while working as a missionary and pastor. After returning from my overseas work, I decided to make a career switch and pursue information technology. Currently, I am pursuing a Bachelor of Science in Information Technology from Liberty with a concentration in Web & Mobile Programming. I currently work as the office manager/system administrator for the BMA of Texas while I am pursuing the degree. I am in my fifth semester and have 6 classes to go! I hope to graduate at the end of this year.
-      </p><br/>
-      <p>
-        With this degree I am hoping to go into the IT field so that I can better provide for my family and serve God with my IT skills by building websites and mobile applications. I have already build several websites and published mobile apps to the Google and Apple app stores utilizing the web technologies of Ionic and React. I have found that this type of programming for mobile applications is very versatile and incredibly fun for me to do! From this course I would like to learn more about some of the more back-end aspects utilizing Node.js, Express, and MongoDB to develop more robust full-stack applications. I have been wanting to learn the MERN stack and, since I have already used React, I am excited to learn more about these other technologies.
-      </p><br/>
-
-      <!--Three facts-->
-      <div class="content">
-        <h2>Three Facts About Me</h2>
-        <ul>
-          <li>I can speak both the Estonian and Russian languages. I learned them while living overseas in Estonia and Ukraine.</li>
-          <li>I love to read and learn. I'm constantly taking in new information.</li>
-          <li>I have a weird sense of humor.</li>
-        </ul>
-      </div>
-
-      <!--My info in a table-->
-      <div class="content">
-        <h2>My Info</h2>
-        <table class="center">
-          <tr>
-            <th>What?</th>
-            <th>My Info</th>
-          </tr>
-          <tr>
-            <td><em>Phone Number</em></td>
-            <td>469-494-3670</td>
-          </tr>
-          <tr>
-            <td><em>City</em></td>
-            <td>Waxahachie</td>
-          </tr>
-          <tr>
-            <td><em>State</em></td>
-            <td>Texas</td>
-          </tr>
-          <tr>
-            <td><em>Bible Verse</em></td>
-            <td>Acts 20:24</td>
-          </tr>
-        </table>
-      </div>
-
-      <!--Four things to learn-->
-      <div class="content">
-        <h2>Four Things I Want to Learn</h2>
-        <ol>
-          <li>I would like to learn about how to implement a backend with MongoDB.</li>
-          <li>I would like to learn about JQuery Mobile.</li>
-          <li>I would like to learn more about developing user-friendly applications.</li>
-          <li>I would like to learn more about using Node.js and Express.</li>
-        </ol>
       </div>
     </section>
 
-    <!--Footer-->
-    <footer class="myfooter">
-      <div class="content has-text-centered">
-        <p>
-          Church activity application
-        </p>
+    <!--Login-->
+    <section class="section">
+      <div data-role="content">
+        Password : <input type="password" id="passcode" />
+
+        <div data-role="controlgroup" id="keypad">
+          <a data-role="button" onclick="enterPassword()" type="submit" >Enter</a>
+          <a data-role="button" href="about.html">About</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValue(7)">7</a>
+          <a data-role="button" onclick="addValue(8)">8</a>
+          <a data-role="button" onclick="addValue(9)">9</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValue(4)">4</a>
+          <a data-role="button" onclick="addValue(5)">5</a>
+          <a data-role="button" onclick="addValue(6)">6</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValue(1)">1</a>
+          <a data-role="button" onclick="addValue(2)">2</a>
+          <a data-role="button" onclick="addValue(3)">3</a>
+        </div>
+        <div data-role="controlgroup" data-type="horizontal">
+          <a data-role="button" onclick="addValue(0)">0</a>
+          <a data-role="button" onclick="addValue('bksp')" data-icon="delete">del</a>
+        </div>
       </div>
-    </footer>
+    </section>
+    
+
   </body>
 </html>

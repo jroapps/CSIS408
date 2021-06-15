@@ -2,7 +2,7 @@
 body, div {
     text-shadow: none !important;
     text-align: left;
-    padding: 10px;
+    padding: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
@@ -15,6 +15,18 @@ h2 {
     font-size: 20px !important;
     font-weight: bold;
     text-align: center;
+}
+
+h3 {
+    color: white !important;
+    text-align: center !important;
+    font-size: 26px !important;
+}
+
+h4 {
+    text-align: center !important;
+    font-size: medium !important;
+    color: red !important;
 }
 
 .title-p {
@@ -72,7 +84,7 @@ table tr th {
 
 footer p {
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .myfooter {

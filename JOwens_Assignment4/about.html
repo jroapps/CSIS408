@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>About</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <script src="script.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!--Header-->
+    <div data-role="header">
+      <a data-role="button" data-icon="bars" data-iconpos="left" data-inline="true" rel="external" onclick="checkLoginStatus()">Menu</a>
+      <a href="about.html" data-role="button" data-icon="info" data-iconpos="right" data-inline="true" rel="external">About</a>
+      <h1>About</h1>
+    </div>
+
+    <!--Project overview-->
+    <section class="section">
+      <h2>Project Overview - Justin Owens</h2><br>
+      <p>
+        This application allows users to log their hours and mission work activity done either on their own or via their church. The application allows the user to enter and update their personal information as well as being able to log in and out of the application for security. The user can also clear all of their work history and start from scratch.
+      </p><br>
+      <p>
+        The portion of this project that challenged me the most was getting the JSON data stored and read from when displaying the data. I had worked with objects before, but the entries were stored in a multi-dimensional array and, once I figured that out, I could display it properly. I was also challenged with having two functions load concurrently when the page loads to display both user data and work activity data.
+      </p><br>
+    
+      <!--Bible verse about providing for less fortunate-->
+      <h2>Bible Verse</h2><br>
+      <p>
+        A Bible verse that I feel is fitting regarding giving things and time to the less fortunate is Matthew 25:37-40, "Then the righteous will answer him, saying 'Lord, when did we see you hungry and feed you, or thirsty and give you drink? And when did we see you a stranger and welcome you, or naked and clothe you? And when did we see you sick or in prison and visit you?' And the King will answer them, 'Truly, I say to you, as you did it to one of the least of these my brothers, you did it to me'" (<em>English Standard Version Bible</em>, 2001).
+      </p><br>
+    </section>
+  </body>
+</html>

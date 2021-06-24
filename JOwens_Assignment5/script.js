@@ -1,3 +1,5 @@
+"use strict"
+
 // add number to password entry
 const addValue = (button) => {
   var currentValue = document.getElementById("passcode").value;
@@ -157,7 +159,7 @@ const displayUserInfo = () => {
     console.log(e);
   }
 
-  // checking to see if entries exist
+  // checking to see if user exists
   if (user != null) {
     var fname = user[0].firstname;
     var lname = user[0].lastname;
@@ -383,17 +385,12 @@ const drawShape = () => {
   drawLine(context, 100, 210, 150, 210);
 
   // top fill
-  context.rect(100, 10, 50, 50);
-  context.fillStyle = "#007578";
-  context.fill();
+  context.rect(100, 10, 50, 200);
 
   // middle portion fill
   context.rect(50, 60, 150, 50);
-  context.fillStyle = "#007578";
-  context.fill();
 
-  // bottom fill
-  context.rect(100, 110, 50, 100);
+  // fill shape
   context.fillStyle = "#007578";
   context.fill();
   
@@ -406,10 +403,116 @@ const drawLine = (context, startX, startY, endX, endY) => {
   context.stroke();
 }
 
-// activity graph canvas creation
-const activityGraph = () => {
+// verify if data exists for graph
+const dataVerify = () => {
+  var entries = localStorage.getItem("entries");
+  if (entries == null) {
+    var message = "There is no work activity to display.";
+    document.getElementById("verify").innerHTML = message;
+    document.getElementById("activityCanvas").style = "";
+    document.getElementById("activityCanvas").innerHTML = "";
+  }
+}
+
+// setting up canvas
+const setupCanvas = () => {
   var canvas = document.getElementById("activityCanvas");
   var context = canvas.getContext("2d");
 
+  context.fillStyle = "white";
+  context.fillRect(0, 0, 550, 550);
+}
+
+// activity graph canvas creation
+const activityGraph = () => {
+  if (localStorage.getItem("entries") === null) {
+    alert("No records exist.");
+    window.location.href = "menu.html";
+  } else {
+    setupCanvas();
+
+  var dateArray = new Array();
+  var hoursArray = new Array();
+  getHistory(dateArray, hoursArray);
+
+  var hoursLower = new Array(2);
+  var hoursUpper = new Array(2);
+  getHoursBounds(hoursLower, hoursUpper);
+
+  labelAxes();
+  drawLines(hoursArray, hoursUpper, hoursLower, dateArray);
+  }
+}
+
+// setting the chart bounds
+const getHoursBounds = (hoursLower, hoursUpper) => {
+  var entries = JSON.parse(localStorage.getItem("entries"));
+  var hoursLevel = new Array();
   
+  for (var i = 0; i < entries.length; i++) {
+    hoursLevel[i] = parseFloat(entries[i][0].hoursWorked);
+  }
+
+  hoursLevel.sort(function(a, b){return a - b});
+  var upper = hoursLevel.length - 1;
+
+  hoursLower[0] = hoursLower[1] = hoursLevel[0];
+  hoursUpper[0] = hoursUpper[1] = hoursLevel[upper];
+}
+
+// getting the history
+const getHistory = (dateArray, hoursArray) => {
+  var entries = JSON.parse(localStorage.getItem("entries"));
+
+  for (var i = 0; i < entries.length; i++) {
+    var date = new Date(entries[i][0].date);
+
+    var month = date.getMonth() + 1;
+    var day = date.getDate() + 1;
+
+    // x-axis label
+    dateArray[i] = (month + "/" + day);
+
+    // point to plot on graph
+    hoursArray[i] = parseFloat(entries[i][0].hoursWorked);
+  }
+}
+
+// drawing lines for graph
+const drawLines = (hoursArray, hoursUpper, hoursLower, dateArray) => {
+  var hoursLine = new RGraph.Line("activityCanvas", hoursArray, hoursUpper, hoursLower)
+    .Set("labels", dateArray)
+    .Set("colors", ["blue", "green", "red"])
+    .Set("shadow", true)
+    .Set("shadow.offsetx", 1)
+    .Set("shadow.offsety", 1)
+    .Set("linewidth", 1)
+    .Set("numxticks", 6)
+    .Set("scale.decimals", 2)
+    .Set("xaxispos", "bottom")
+    .Set("gutter.left", 40)
+    .Set("tickmarks", "filledcircle")
+    .Set("ticksize", 5)
+    .Set("chart.labels.ingraph",
+      [,, ["hours", "blue", "yellow", 1, 80],, ])
+    .Set("chart.title", "Work Activity Graph")
+    .Draw();
+}
+
+// labeling axes for graph
+const labelAxes = () => {
+  var canvas = document.getElementById("activityCanvas");
+  var context = canvas.getContext("2d");
+  context.font = "11px Georgia";
+  context.fillStyle = "green";
+  context.fillText("Date (MM/DD)", 400, 470);
+  context.rotate(-Math.PI/2);
+  context.textAlign = "center";
+  context.fillText("Hours Worked", -250, 10);
+}
+
+// loading functions for graph page
+const graphLoad = () => {
+  //dataVerify();
+  activityGraph();
 }

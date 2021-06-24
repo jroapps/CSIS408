@@ -55,6 +55,10 @@ canvas {
   max-width: 100%;
 }
 
+.canvasDiv {
+  position: relative;
+}
+
 
 /* Images */
 

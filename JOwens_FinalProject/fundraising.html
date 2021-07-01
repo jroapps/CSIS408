@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Fundraising Log</title>
+
+    <!--jQuery modules-->
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
+    <!--local javascript modules-->
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <script type="text/javascript" src="scripts/fundraising.js"></script>
+    <script type="text/javascript" src="scripts/user.js"></script>
+    <script type="text/javascript" src="scripts/goal.js"></script>
+
+    <!--CSS modules-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <!--Core Firebase JS SDK-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!--Firebase Auth module-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+      // Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDSpcvHTfE2WDBWPSZ7zcOkr-Tkh3gKxuI",
+        authDomain: "missionary-fundraising-log.firebaseapp.com",
+        projectId: "missionary-fundraising-log",
+        storageBucket: "missionary-fundraising-log.appspot.com",
+        messagingSenderId: "993282467403",
+        appId: "1:993282467403:web:729c03ab8de9b027c8cfce"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+  </head>
+
+  <body onload="fundraisingStart()">
+    <!--Header-->
+    <div data-role="header">
+      <a href="main.html" data-role="button" data-icon="bars" data-iconpos="left" data-inline="true" rel="external">Menu</a>
+      <a href="about.html" data-role="button" data-icon="info" data-iconpos="right" data-inline="true" rel="external">About</a>
+      <h1>Missionary Fundraising Log</h1>
+    </div>
+
+    <!--Displaying user info-->
+    <section class="section">
+      <h2>Missionary Fundraising Log</h2><br>
+      <div class="content" id="userInfo"></div>
+      <button onclick="userNav()">Edit Profile</button><br>
+
+      <!--Fundraising goal tables-->
+      <h2>Fundraising Goals</h2><br>
+      <div class="content" id="totalGoalTable"></div><br>
+      <div class="content" id="pledgeGoalTable"></div>
+      <button onclick="goalNav()">Update Goal</button><br>
+
+      <!--Fundraising history table-->
+      <h2>Fundraising History</h2><br>
+      <div class="content" id="history"></div>      
+
+      <!--Enter new fundraising or clear all fundraising-->
+      <button onclick="entryNav()">New Entry</button>
+      <button onclick="clearFundraising()">Clear All Fundraising History</button>
+    </section>
+  </body>
+</html>

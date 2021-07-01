@@ -36,7 +36,7 @@ const drawShape = () => {
   context.rect(50, 60, 150, 50);
 
   // fill shape
-  context.fillStyle = "#007578";
+  context.fillStyle = "#7c1e00";
   context.fill();
   
 }

@@ -1,6 +1,6 @@
 // setting up canvas for graph
 const setupCanvas = () => {
-  var canvas = document.getElementById("activityCanvas");
+  var canvas = document.getElementById("fundraisingCanvas");
   var context = canvas.getContext("2d");
 
   context.fillStyle = "white";
@@ -11,8 +11,8 @@ const setupCanvas = () => {
 const drawChart = () => {
   // checking for entries
   if (localStorage.getItem("entries") === null) {
-    alert("No entries exist. To see chart, enter work activity.");
-    window.location.href = "workactivity.html";
+    alert("No entries exist. To see chart, enter fundraising.");
+    window.location.href = "fundraising.html";
   } else {
     setupCanvas();
 
@@ -30,9 +30,9 @@ const drawChart = () => {
 
     // initializing arrays
     var dateArray = new Array();
-    var hoursArray = new Array();
+    var amountArray = new Array();
     var chartArray = new Array();
-    getHistory(dateArray, hoursArray, chartArray);
+    getGoalHistory(dateArray, amountArray, chartArray);
 
     // sorting by date
     chartArray.sort();
@@ -40,7 +40,7 @@ const drawChart = () => {
     // populating arrays by date
     for (var i = 0; i < chartArray.length; i++) {
       dateArray[i] = chartArray[i][0];
-      hoursArray[i] = chartArray[i][1];
+      amountArray[i] = chartArray[i][1];
     }
 
     // label for bottom of chart
@@ -50,13 +50,13 @@ const drawChart = () => {
     const data = {
       labels: labels,
       datasets: [{
-        label: 'Hours Worked per Day',
-        backgroundColor: '#007578',
-        borderColor: '#007578',
+        label: 'Daily Fundraising',
+        backgroundColor: '#7c1e00',
+        borderColor: '#7c1e00',
         pointBackgroundColor: 'black',
         pointBorderColor: 'black',
         pointStyle: 'star',
-        data: hoursArray,
+        data: amountArray,
         pointRadius: 6,
         tension: 0.4
       }]
@@ -82,15 +82,15 @@ const drawChart = () => {
         },
         title: {
           display: true,
-          text: 'Work Activity Graph',
+          text: 'Fundraising Graph',
           color: 'black',
           font: {
             size: 28
           }
         },
         datalabels: {
-          color: 'black',
-          align: 'bottom',
+          color: 'white',
+          align: 'center',
           font: {
             size: 14,
             weight: 'bold'
@@ -101,15 +101,15 @@ const drawChart = () => {
         x: {
           display: true,
           ticks: {
-            color: '#911000',
-            align: 'start',
+            color: 'black',
+            align: 'center',
             font: {
               weight: 'bold'
             }
           },
           title: {
             display: true,
-            text: 'Day of Activity',
+            text: 'Date Given',
             color: 'black',
             font: {
               size: 18,
@@ -130,7 +130,7 @@ const drawChart = () => {
           },
           title: {
             display: true,
-            text: 'Hours Worked',
+            text: 'Amount Given',
             color: 'black',
             font: {
               size: 18,
@@ -143,7 +143,7 @@ const drawChart = () => {
 
     //chart configuration
     const config = {
-      type: 'line',
+      type: 'bar',
       data,
       options: options,
       plugins: [plugin]
@@ -151,14 +151,14 @@ const drawChart = () => {
 
     // sending chart configuration to canvas
     var myChart = new Chart(
-      document.getElementById('activityCanvas'),
+      document.getElementById('fundraisingCanvas'),
       config
     );
   }
 }
 
-// getting the work history
-const getHistory = (dateArray, hoursArray, chartArray) => {
+// getting the fundraising history
+const getGoalHistory = (dateArray, amountArray, chartArray) => {
   var entries = JSON.parse(localStorage.getItem("entries"));
 
   for (var i = 0; i < entries.length; i++) {
@@ -178,10 +178,10 @@ const getHistory = (dateArray, hoursArray, chartArray) => {
     dateArray[i] = date;
 
     // point to plot on graph
-    hoursArray[i] = parseFloat(entries[i][0].hoursWorked);
+    amountArray[i] = parseFloat(entries[i][0].amountDonated);
 
     // multidimensional chart array to sort by date
-    chartArray[i] = [dateArray[i], hoursArray[i]];
+    chartArray[i] = [dateArray[i], amountArray[i]];
   }
   return chartArray;
 }

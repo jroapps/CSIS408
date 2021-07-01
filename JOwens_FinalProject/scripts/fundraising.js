@@ -1,5 +1,5 @@
-// displaying work history
-const displayWorkHistory = () => {
+// displaying fundraising history
+const displayFundraisingHistory = () => {
   try {
     var entries = JSON.parse(localStorage.getItem("entries"));
   }
@@ -16,12 +16,12 @@ const displayWorkHistory = () => {
 
   // initial table
   document.getElementById("history").innerHTML = 
-  "<table class='center' id='workTable'>" +
+  "<table class='centerHistory' id='fundTable'>" +
     "<tr>" +
       "<th>Donation Date</th>" +
-      "<th>Person Ministered To</th>" +
-      "<th>Items Donated</th>" +
-      "<th>Hours Worked</th>" +
+      "<th>Donated From</th>" +
+      "<th>Amount Donated</th>" +
+      "<th>Monthly Pledge</th>" +
     "</tr>" +
   "</table>";
 
@@ -32,9 +32,9 @@ const displayWorkHistory = () => {
     for (var i = 0; i < entries.length; i++) {
       var entry = entries[i][0];
       var date = entry.date;
-      var person = entry.person;
-      var items = entry.itemsDonated;
-      var hours = entry.hoursWorked;
+      var donater = entry.donater;
+      var amount = entry.amountDonated;
+      var pledge = entry.monthlyPledge;
 
       // converting date to mm/dd/yyyy format
       const dateConvert = (date) => {
@@ -45,23 +45,29 @@ const displayWorkHistory = () => {
       }
       date = dateConvert(date);
 
+      amount = parseFloat(amount);
+      pledge = parseFloat(pledge);
+      
+      amount = amount.toFixed(2);
+      pledge = pledge.toFixed(2);
+
       // displaying results in a table to div container
-      $("#workTable").append( 
+      $("#fundTable").append( 
         "<tr>" +
           "<td>" + date + "</td>" +
-          "<td>" + person + "</td>" +
-          "<td>" + items + "</td>" +
-          "<td>" + hours + "</td>" +
+          "<td>" + donater + "</td>" +
+          "<td>$" + amount + "</td>" +
+          "<td>$" + pledge + "</td>" +
         "</tr>");
     }
   }
 }
 
-// clear work history
-const clearWork = () => {
+// clear fundraising history
+const clearFundraising = () => {
   // clearing all entries
   localStorage.removeItem("entries");
-  if (confirm("All work entries removed.")) {
+  if (confirm("All fundraising entries removed.")) {
     window.location.reload();
   }
 }

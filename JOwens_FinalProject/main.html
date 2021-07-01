@@ -17,6 +17,26 @@
     <!--CSS modules-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css" />
     <link rel="stylesheet" href="style.css" />
+
+    <!--Core Firebase JS SDK-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+
+    <!--Firebase Auth module-->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+
+    <script>
+      // Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDSpcvHTfE2WDBWPSZ7zcOkr-Tkh3gKxuI",
+        authDomain: "missionary-fundraising-log.firebaseapp.com",
+        projectId: "missionary-fundraising-log",
+        storageBucket: "missionary-fundraising-log.appspot.com",
+        messagingSenderId: "993282467403",
+        appId: "1:993282467403:web:729c03ab8de9b027c8cfce"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   </head>
 
   <body>
@@ -30,9 +50,11 @@
     <!--Navigation to Pages-->
     <section class="section">
       <div class="content">
-        <button onclick="userNav()">User Information</button>
-        <button onclick="workNav()">Work Activity Log</button>
-        <button onclick="graphNav()">Activity Graph</button><br>
+        <h3>** New Users Begin Here! **</h3>
+        <button onclick="userNav()">User Information</button><br>
+        <button onclick="goalNav()">Enter/Update Goal</button><br>
+        <button onclick="fundNav()">Fundraising Log</button>
+        <button onclick="graphNav()">Fundraising Graph</button><br>
         <button onclick="logOut()">Logout</button>
       </div>
     </section>

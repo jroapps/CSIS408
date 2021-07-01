@@ -12,31 +12,47 @@ const checkUserInput = () => {
      ($("#lname").val() != "") &&
      ($("#bdate").val() != "") && ($("#bdate").val() <= currentDate) &&
      ($("#phone").val() != "") &&
-     ($("#gender option:selected").val() != "Select Gender")) {
+     ($("#username").val() != "") && 
+     ($("#password").val() != "")) {
       return true;
      } else {
        return false;
      }
 }
 
+// checking for valid email address
+const checkEmail = () => {
+  var email = document.getElementById("username").value;
+  var emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  
+  if (!email.match(emailPattern)) {
+      document.getElementById("username").innerHTML = "";
+      window.location.reload();
+      return false;
+  } else {
+    return true;
+  }
+}
+
 // saving user input to JSON object
 const submitUserInput = () => {
-  if (checkUserInput()) {
+  if (checkUserInput() && checkEmail()) {
     var fname = document.getElementById("fname").value;
     var lname = document.getElementById("lname").value;
-    var password = document.getElementById("password").value;
     var bdate = document.getElementById("bdate").value;
     var phone = document.getElementById("phone").value;
-    var gender = document.getElementById("gender").value;
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
 
+    // creating user array
     var user = [
       {
         firstname: fname,
         lastname: lname,
-        password: password,
         birthdate: bdate,
         phonenumber: phone,
-        gender: gender
+        email: username,
+        password: password
       }
     ];
 
@@ -47,8 +63,9 @@ const submitUserInput = () => {
       // alerting user of saved information
       alert("Information Saved!");
 
-      // redirecting to main menu
-      window.location.href = "main.html";
+      // redirecting to fundraising log
+      window.location.href = "fundraising.html";
+
     } catch (e) {
       if (window.navigator.vendor === "Google Inc.") {
         if (e == DOMException.QUOTA_EXCEEDED_ERR) {
@@ -81,15 +98,40 @@ const displayUserInfo = () => {
     console.log(e);
   }
 
+  // set executed state for user creation
+  if (user == null) {
+    var executed = false;
+    localStorage.setItem("executed", executed);
+  }
+
   // checking to see if user exists
   if (user != null) {
     var fname = user[0].firstname;
     var lname = user[0].lastname;
-    var password = user[0].password;
     var bdate = user[0].birthdate;
     var phone = user[0].phonenumber;
-    var gender = user[0].gender;
+    var email = user[0].email;
+    var password = user[0].password;
     var fullName = fname + " " + lname;
+
+    // getting executed state
+    var executed = localStorage.getItem("executed");
+
+    // saving created user to Firebase
+    if (!executed) {
+      // saving username and password to Firebase
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in automatically
+        var user = userCredential.user;
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+      executed = true;
+      localStorage.setItem("executed", executed);
+    }
 
     // converting date to mm/dd/yyyy format
     const dateConvert = (date) => {
@@ -109,9 +151,9 @@ const displayUserInfo = () => {
 
     // displaying results in a table to div container
     document.getElementById("userInfo").innerHTML = 
-    "<table class='center'>" +
+    "<table class='centerUser'>" +
       "<tr>" +
-        "<th>Name</th>" +
+        "<th>Missionary Name</th>" +
         "<td>" + fullName + "</td>" +
       "</tr>" +
       "<tr>" +
@@ -123,8 +165,8 @@ const displayUserInfo = () => {
         "<td>" + phoneNumber + "</td>" +
       "</tr>" +
       "<tr>" +
-        "<th>Gender</th>" +
-        "<td>" + gender + "</td>" +
+        "<th>Email Address</th>" +
+        "<td>" + email + "</td>" +
       "</tr>" +
       "<tr>" +
         "<th>Password</th>" +

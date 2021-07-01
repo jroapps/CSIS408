@@ -9,8 +9,9 @@ const checkEntry = () => {
     (('' + date).length < 2 ? '0' : '') + date;
   
   if (($("#donationDate").val() != "") && ($("#donationDate").val() <= currentDate) &&
-     ($("#ministered").val() != "") &&
-     ($("#hours").val() != "")) {
+     ($("#donater").val() != "") &&
+     ($("#amount").val() != "") &&
+     ($("#pledge").val() != "")) {
       return true;
      } else {
        return false;
@@ -21,16 +22,16 @@ const checkEntry = () => {
 const submitEntry = () => {
   if (checkEntry()) {
     var donationDate = document.getElementById("donationDate").value;
-    var ministered = document.getElementById("ministered").value;
-    var items = document.getElementById("items").value;
-    var hours = document.getElementById("hours").value;
+    var donater = document.getElementById("donater").value;
+    var amount = document.getElementById("amount").value;
+    var pledge = document.getElementById("pledge").value;
 
     var entry = [
       {
         date: donationDate,
-        person: ministered,
-        itemsDonated: items,
-        hoursWorked: hours
+        donater: donater,
+        amountDonated: amount,
+        monthlyPledge: pledge
       }
     ];
 
@@ -49,7 +50,7 @@ const submitEntry = () => {
       alert("Entry Saved!");
 
       // redirecting to main menu
-      window.location.href = "workactivity.html";
+      window.location.href = "fundraising.html";
     } catch (e) {
       if (window.navigator.vendor === "Google Inc.") {
         if (e == DOMException.QUOTA_EXCEEDED_ERR) {

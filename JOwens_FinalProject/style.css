@@ -6,6 +6,10 @@ body, div {
   font-family: Verdana, Geneva, Tahoma, sans-serif !important;
 }
 
+.ui-header {
+  background: #7c1e00 !important;
+}
+
 h1 {
   font-size: 30px;
   text-align: center;
@@ -18,19 +22,11 @@ h2 {
 }
 
 h3 {
-  color: white !important;
+  font-size: 18px !important;
   text-align: center !important;
-  font-size: 26px !important;
-}
-
-h4 {
-  text-align: center !important;
-  font-size: medium !important;
+  font-weight: bold;
+  font-style: italic;
   color: red !important;
-}
-
-.li-active {
-  color: #363636;
 }
 
 .title-p {
@@ -48,6 +44,12 @@ section p {
   text-align: center;
 }
 
+.crossCanvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .canvasContainer {
   position: relative;
   margin: auto;
@@ -56,37 +58,37 @@ section p {
 }
 
 
-/* Images */
-
-img {
-  display: block;
-  margin-left: auto;
-  border-radius: 30px;
-  margin-right: auto;
-  max-width: 100%;
-  height: auto;
-}
-
-figcaption {
-  text-align: center;
-  font-weight: bold;
-}
-
-
 /* Table */
 
-.center {
+.centerUser {
   margin-left: auto;
   margin-right: auto;
+  background-color: #363636;
+}
+
+.centerHistory {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #363636;
+}
+
+.centerGoal {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #7c1e00;
 }
 
 table {
-  background-color: #007578;
+  background-color: #363636;
   color: white;
   border-radius: 15px;
   text-align: center;
   table-layout: fixed;
   width: 100%;
+}
+
+.historyTable {
+  background-color: #7c1e00;
 }
 
 table tr td {
@@ -96,18 +98,4 @@ table tr td {
 table tr th {
   padding-left: 8px;
   color: white !important;
-}
-
-
-/* Footer */
-
-footer p {
-  text-align: center;
-  font-size: 16px;
-}
-
-.myfooter {
-  background-color: #363636;
-  padding: 3rem 1.5rem 2.8rem;
-  color: white;
 }
